@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: browny-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: browny-web
+  template:
+    metadata:
+      labels:
+        app: browny-web
+    spec:
+      containers:
+        - name: browny-web
+          image: tienuv1/browny-website:latest
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: browny-service
+spec:
+  selector:
+    app: browny-web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
