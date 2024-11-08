@@ -1,7 +1,7 @@
 # Kubernetes Course Challenge Labs
 ---
 ## 🚀 Introduction
-This repository contains solutions to three hands-on lab challenges from my **Viettel High Tech (VHT)** Kubernetes course. The labs focus on deploying, configuring, and managing containerized applications using Kubernetes resources like Deployments and Services. Each challenge includes detailed instructions, commands used, explanations of chosen methods, and screenshots of the results.
+This repository contains solutions to three hands-on lab challenges from my **Viettel High Tech (VHT)** Kubernetes course. The labs focus on deploying, configuring, and managing containerized applications using Kubernetes resources like Deployments and Services. 
 
 ## 🔧 Prerequisites
 Ensure you have the following tools installed:
@@ -20,8 +20,8 @@ Ensure you have the following tools installed:
 > ```
 > minikube service <service-name> 
 > ```
->  This is necessary because the default method of accessing services via NodePort does not work seamlessly on macOS. Refer to these links for more details.
-> (https://minikube.sigs.k8s.io/docs/handbook/accessing/), (https://github.com/kubernetes/minikube/issues/11193)
+>  This is necessary because the default method of accessing services via NodePort does not work seamlessly on macOS. Refer to these links for more details
+> (https://minikube.sigs.k8s.io/docs/handbook/accessing/), (https://github.com/kubernetes/minikube/issues/11193).
 
 
 ### Challenge 1: Default nginx - Basic
@@ -53,14 +53,16 @@ Ensure you have the following tools installed:
     kubectl get svc nginx-default
     ```
 
-    **-----------TODO-----------**
+    ![Alt text](result/challenge1_status.png)
+
     
    - Accessed the website:
      ```bash
      minikube service nginx-default
      ```
+     
+   ![Alt text](result/challenge1_web.png)
 
-   **-----------TODO-----------**
 
 
 ---
@@ -82,7 +84,7 @@ Ensure you have the following tools installed:
 > - Thực hiên curl tới nodePort và cho ra kết quả trang web tĩnh theo template
 
 
-#### 📝 Step-by-step Process
+#### 📝 Step-by-step Process *(`clinic-web` Directory)*
    - Download a Website Template and create a `Dockerfile`
    - Build and Push the Docker Image
      ```
@@ -99,13 +101,13 @@ Ensure you have the following tools installed:
     kubectl get all -l app=static-web
     kubectl get svc web-service
     ```
-    **-----------TODO-----------**
+    ![Alt text](result/challenge2_status.png)
   - Accessed the website:
     ```bash
     minikube service web-service
     ```
    
-   **-----------TODO-----------**
+   ![Alt text](result/challenge2_web.png)
      
 
 
@@ -127,8 +129,8 @@ Ensure you have the following tools installed:
 > - curl http://\<node-ip>:\<node-port>/web1 > trả về static web 1
 > - curl http://\<node-ip>:\<node-port>/web2 > trả về static web 2
 
-#### 📝 Step-by-step Process
-1. **Deploying Websites**
+#### 📝 Step-by-step Process 
+1. **Deploying Websites** *(`clinic-web`, `browny-web` Directories)*
    - Built Docker images for two static websites (`clinic-website-template` and `browny-website`).
      ```bash
      docker build -t <username>/clinic-website-template:latest .
@@ -143,8 +145,9 @@ Ensure you have the following tools installed:
     ```
     kubectl get all
     ```
+    ![Alt text](result/challenge3_status.png)
 
-2. **Setting up NGINX Proxy**
+2. **Setting up NGINX Proxy** *(`nginx-test` Directory)*
    - Configured `nginx.conf` to route `/web1` to `clinic-website-template` service and `/web2` to `browny-website` service.
    - Built the NGINX proxy Docker image:
      ```bash
@@ -155,6 +158,10 @@ Ensure you have the following tools installed:
      kubectl apply -f nginx-test.yaml
      ```
    - Accessed the proxy using `minikube service nginx-test`.
+      - /web1 (clinic-web):
+   ![Alt text](result/challenge3_web1.png)
+      - /web2 (browny-web):
+   ![Alt text](result/challenge3_web2.png)
 
 
 
